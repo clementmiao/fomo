@@ -32,6 +32,8 @@ a {
   // text-align: center;
   // margin: 1em 0;
   display: flex;
+  margin-right: 10px;
+
 }
 
 .thumbnail-img {
@@ -51,7 +53,6 @@ a {
 
 .list-group-item {
   flex-grow: 2;
-  margin-left: 10px;
 }
 //
 // .listing-company-category {
@@ -75,4 +76,9 @@ a {
 
 .search-box {
   flex-grow: 1;
+}
+
+.form-group {
+  flex-grow: 1;
+  display: flex;
 }

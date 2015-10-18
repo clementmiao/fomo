@@ -82972,16 +82972,16 @@ module.exports = React.createClass({displayName: "exports",
   },
   render: function() {
     return(
-      React.createElement("form", {className: "search-bar"}, 
-        React.createElement("input", {
-          type: "text", 
-          placeholder: "input link URL...", 
-          value:  this.props.searchText, 
-          ref: "searchTextInput", 
-          onChange:  this.handleChange, 
-          className: "search-box"}
+        React.createElement("div", {className: "form-group search-bar"}, 
+          React.createElement("input", {
+            type: "text", 
+            placeholder: "input link URL...", 
+            value:  this.props.searchText, 
+            ref: "searchTextInput", 
+            onChange:  this.handleChange, 
+            className: "search-box form-control"}
+          )
         )
-      )
     )
   }
 })
@@ -83007,7 +83007,14 @@ module.exports = React.createClass({displayName: "exports",
     return(
       React.createElement("div", {className: "search-table"}, 
         React.createElement(Search, {searchText:  this.state.searchText, onUserInput:  this.handleUserInput}), 
-        React.createElement(Threads, {searchText:  this.state.searchText})
+        React.createElement("div", {className: "panel panel-default"}, 
+          React.createElement("div", {className: "panel-heading"}, 
+            React.createElement("h3", {className: "panel-title"}, "Reddit Threads")
+          ), 
+          React.createElement("div", {className: "panel-body"}, 
+            React.createElement(Threads, {searchText:  this.state.searchText})
+          )
+        )
       )
     )
   }
@@ -83018,11 +83025,15 @@ var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
     render: function() {
+        var tn;
+        if (this.props.thumbnail) {
+          tn = React.createElement("div", {className: "post-thumb"}, 
+                React.createElement("img", {src:  this.props.thumbnail, className: "thumbnail-img"})
+               );
+        };
         return (
           React.createElement("div", {className: "post-container"}, 
-            React.createElement("div", {className: "post-thumb"}, 
-              React.createElement("img", {src:  this.props.thumbnail, className: "thumbnail-img"})
-            ), 
+             tn, 
             React.createElement("a", {href:  'http://www.reddit.com' + this.props.permalink, className: "list-group-item"}, 
                 React.createElement("h4", {className: "list-group-item-heading post"}, 
                     React.createElement("span", {className: "post-title"},  this.props.title), 
@@ -83061,7 +83072,6 @@ module.exports = React.createClass({displayName: "exports",
     var encodedText = encodeURI(searchText);
 		request('https://www.reddit.com/search.json?q=' + encodedText, function(error, response, body) {
       var result = JSON.parse(body);
-      console.log(result);
       var flattened = [];
       if (result.constructor != Array) {
         result = [result];
@@ -83074,7 +83084,7 @@ module.exports = React.createClass({displayName: "exports",
           }
         }
       };
-      // console.log(flattened[0].data);
+      console.log(flattened[0].data);
       var res = {};
       res["data"] = flattened;
 			this.setState(res);

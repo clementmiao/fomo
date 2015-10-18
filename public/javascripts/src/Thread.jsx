@@ -2,11 +2,15 @@ var React = require('react');
 
 module.exports = React.createClass({
     render: function() {
+        var tn;
+        if (this.props.thumbnail) {
+          tn = <div className="post-thumb">
+                <img src={ this.props.thumbnail } className="thumbnail-img"/>
+               </div>;
+        };
         return (
           <div className="post-container">
-            <div className="post-thumb">
-              <img src={ this.props.thumbnail } className="thumbnail-img"/>
-            </div>
+            { tn }
             <a href={ 'http://www.reddit.com' + this.props.permalink } className="list-group-item">
                 <h4 className="list-group-item-heading post">
                     <span className="post-title">{ this.props.title }</span>

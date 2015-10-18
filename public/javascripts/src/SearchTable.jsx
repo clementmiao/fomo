@@ -18,7 +18,14 @@ module.exports = React.createClass({
     return(
       <div className = "search-table">
         <Search searchText= { this.state.searchText } onUserInput={ this.handleUserInput } />
-        <Threads searchText= { this.state.searchText } />
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">Reddit Threads</h3>
+          </div>
+          <div className="panel-body">
+            <Threads searchText= { this.state.searchText } />
+          </div>
+        </div>
       </div>
     )
   }

@@ -16,7 +16,6 @@ module.exports = React.createClass({
     var encodedText = encodeURI(searchText);
 		request('https://www.reddit.com/search.json?q=' + encodedText, function(error, response, body) {
       var result = JSON.parse(body);
-      console.log(result);
       var flattened = [];
       if (result.constructor != Array) {
         result = [result];
@@ -29,7 +28,7 @@ module.exports = React.createClass({
           }
         }
       };
-      // console.log(flattened[0].data);
+      console.log(flattened[0].data);
       var res = {};
       res["data"] = flattened;
 			this.setState(res);
