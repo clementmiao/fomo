@@ -3,20 +3,25 @@ var React = require('react');
 module.exports = React.createClass({
     render: function() {
         return (
-            <a href="#" className="list-group-item">
-                <h4 className="list-group-item-heading listing-company">
-                    <span className="listing-position-name">{ this.props.position }</span>
-                    <small className="listing-company-name">{ this.props.company }</small>
-                    <small className="listing-location">{ this.props.local }</small>
+          <div className="post-container">
+            <div className="post-thumb">
+              <img src={ this.props.thumbnail } />
+            </div>
+            <a href={ 'http://www.reddit.com' + this.props.permalink } className="list-group-item">
+                <h4 className="list-group-item-heading post">
+                    <span className="post-title">{ this.props.title }</span>
+                    <small className="post-author">{ this.props.author }</small>
+                    <small className="post-score">score: { this.props.score }</small>
                 </h4>
                 <p className="list-group-item-text">
-                    <span className="listing-job-type">Looking for: { this.props.lookingFor }</span>
+                    <span className="listing-job-type">Subreddit: { this.props.subreddit }</span>
                 </p>
                 <p className="list-group-item-text">
-                    <span className="listing-posted">Posted: { this.props.postedDate }</span>
+                    <span className="post-posted">Posted: { this.props.created_date }</span>
                     <span className="listing-company-category">{ this.props.category }</span>
                 </p>
             </a>
+          </div>
         );
     }
 });

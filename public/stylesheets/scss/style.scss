@@ -9,16 +9,24 @@ a {
 	color: #00B7FF;
 }
 
-#jobs {
+#threads {
 	padding-top: 10px;
 }
 
-.listing-location {
+.post-score {
 	float: right;
 }
 
-.listing-company-name {
+.post-thumb img {
+  float: left;
+}
+
+.post-author {
 	margin-left: 10px;
+}
+
+.list-group-item {
+  margin-left: 210px;
 }
 
 .listing-company-category {
