@@ -82972,14 +82972,16 @@ module.exports = React.createClass({displayName: "exports",
   },
   render: function() {
     return(
-        React.createElement("div", {className: "form-group search-bar"}, 
+        React.createElement("div", {className: "input-group search-bar"}, 
+          React.createElement("span", {className: "input-group-addon", id: "basic-addon1"}, "search URL"), 
           React.createElement("input", {
             type: "text", 
             placeholder: "input link URL...", 
             value:  this.props.searchText, 
             ref: "searchTextInput", 
             onChange:  this.handleChange, 
-            className: "search-box form-control"}
+            className: "search-box form-control", 
+            "aria-describeby": "basic-addon1"}
           )
         )
     )

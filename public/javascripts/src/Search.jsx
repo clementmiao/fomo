@@ -8,7 +8,8 @@ module.exports = React.createClass({
   },
   render: function() {
     return(
-        <div className="form-group search-bar">
+        <div className="input-group search-bar">
+          <span className="input-group-addon" id="basic-addon1">search URL</span>
           <input
             type="text"
             placeholder="input link URL..."
@@ -16,6 +17,7 @@ module.exports = React.createClass({
             ref="searchTextInput"
             onChange={ this.handleChange }
             className="search-box form-control"
+            aria-describeby="basic-addon1"
           />
         </div>
     )
