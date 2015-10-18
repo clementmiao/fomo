@@ -12,9 +12,13 @@ module.exports = React.createClass({
 		};
 	},
 	componentDidMount: function() {
-		request('https://www.reddit.com/search.json?q=https%3A%2F%2Fwww.kickstarter.com%2Fprojects%2Fbehrouz%2Fnora-the-smart-snoring-solution%2Fupdates', function(error, response, body) {
+		request('https://www.reddit.com/search.json?q=https%3A%2F%2Fi.imgur.com%2FAMYSUi1.jpg', function(error, response, body) {
       var result = JSON.parse(body);
+      console.log(result);
       var flattened = [];
+      if (result.constructor != Array) {
+        result = [result];
+      }
       for (i = 0; i < result.length; i++) {
         var children = result[i].data.children;
         for (j = 0; j < children.length; j++) {
