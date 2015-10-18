@@ -9,7 +9,7 @@ module.exports = React.createClass({
   render: function() {
     return(
         <div className="input-group search-bar">
-          <span className="input-group-addon" id="basic-addon1">search URL</span>
+          <span className="input-group-addon primary" id="basic-addon1">search URL</span>
           <input
             type="text"
             placeholder="input link URL..."

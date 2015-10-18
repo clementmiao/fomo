@@ -82973,7 +82973,7 @@ module.exports = React.createClass({displayName: "exports",
   render: function() {
     return(
         React.createElement("div", {className: "input-group search-bar"}, 
-          React.createElement("span", {className: "input-group-addon", id: "basic-addon1"}, "search URL"), 
+          React.createElement("span", {className: "input-group-addon primary", id: "basic-addon1"}, "search URL"), 
           React.createElement("input", {
             type: "text", 
             placeholder: "input link URL...", 
@@ -83006,14 +83006,17 @@ module.exports = React.createClass({displayName: "exports",
   },
   render: function() {
     return(
-      React.createElement("div", {className: "search-table"}, 
-        React.createElement(Search, {searchText:  this.state.searchText, onUserInput:  this.handleUserInput}), 
-        React.createElement("div", {className: "panel panel-default"}, 
-          React.createElement("div", {className: "panel-heading"}, 
-            React.createElement("h3", {className: "panel-title"}, "Reddit Threads")
-          ), 
-          React.createElement("div", {className: "panel-body"}, 
-            React.createElement(Threads, {searchText:  this.state.searchText})
+      React.createElement("div", {className: "full-page"}, 
+        React.createElement("h1", {className: "app-header page-header"}, "fomo ", React.createElement("small", null, "find the conversation")), 
+        React.createElement("div", {className: "search-table"}, 
+          React.createElement(Search, {searchText:  this.state.searchText, onUserInput:  this.handleUserInput}), 
+          React.createElement("div", {className: "panel panel-default"}, 
+            React.createElement("div", {className: "panel-heading"}, 
+              React.createElement("h3", {className: "panel-title"}, "Reddit Threads")
+            ), 
+            React.createElement("div", {className: "panel-body"}, 
+              React.createElement(Threads, {searchText:  this.state.searchText})
+            )
           )
         )
       )
