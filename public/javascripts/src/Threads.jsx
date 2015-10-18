@@ -28,7 +28,6 @@ module.exports = React.createClass({
           }
         }
       };
-      console.log(flattened[0].data);
       var res = {};
       res["data"] = flattened;
 			this.setState(res);
@@ -49,6 +48,7 @@ module.exports = React.createClass({
               score={ thread.data.score }
               created_date={ postCreated }
               thumbnail={ thread.data.thumbnail }
+              numComments={ thread.data.num_comments }
 							key={ position }
 						/>
 					)

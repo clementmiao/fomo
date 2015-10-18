@@ -83000,7 +83000,6 @@ module.exports = React.createClass({displayName: "exports",
     };
   },
   handleUserInput: function(searchText) {
-    // console.log(searchText);
     this.setState({
       searchText: searchText
     });
@@ -83029,8 +83028,10 @@ module.exports = React.createClass({displayName: "exports",
     render: function() {
         var tn;
         if (this.props.thumbnail) {
-          tn = React.createElement("div", {className: "post-thumb"}, 
-                React.createElement("img", {src:  this.props.thumbnail, className: "thumbnail-img"})
+          tn = React.createElement("a", {href:  'http://www.reddit.com' + this.props.permalink}, 
+                React.createElement("div", {className: "post-thumb"}, 
+                  React.createElement("img", {src:  this.props.thumbnail, className: "thumbnail-img"})
+                )
                );
         };
         return (
@@ -83043,11 +83044,11 @@ module.exports = React.createClass({displayName: "exports",
                     React.createElement("small", {className: "post-score"}, "score: ",  this.props.score)
                 ), 
                 React.createElement("p", {className: "list-group-item-text"}, 
-                    React.createElement("span", {className: "listing-job-type"}, "Subreddit: ",  this.props.subreddit)
+                    React.createElement("span", {className: "subreddit"}, "Subreddit: ",  this.props.subreddit)
                 ), 
                 React.createElement("p", {className: "list-group-item-text"}, 
                     React.createElement("span", {className: "post-posted"}, "Posted: ",  this.props.created_date), 
-                    React.createElement("span", {className: "listing-company-category"},  this.props.category)
+                    React.createElement("span", {className: "num-comments"},  this.props.numComments, " comments")
                 )
             )
           )
@@ -83086,7 +83087,6 @@ module.exports = React.createClass({displayName: "exports",
           }
         }
       };
-      console.log(flattened[0].data);
       var res = {};
       res["data"] = flattened;
 			this.setState(res);
@@ -83107,6 +83107,7 @@ module.exports = React.createClass({displayName: "exports",
               score:  thread.data.score, 
               created_date:  postCreated, 
               thumbnail:  thread.data.thumbnail, 
+              numComments:  thread.data.num_comments, 
 							key:  position }
 						)
 					)

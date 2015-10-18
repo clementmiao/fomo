@@ -9,7 +9,6 @@ module.exports = React.createClass({
     };
   },
   handleUserInput: function(searchText) {
-    // console.log(searchText);
     this.setState({
       searchText: searchText
     });

@@ -4,9 +4,11 @@ module.exports = React.createClass({
     render: function() {
         var tn;
         if (this.props.thumbnail) {
-          tn = <div className="post-thumb">
-                <img src={ this.props.thumbnail } className="thumbnail-img"/>
-               </div>;
+          tn = <a href={ 'http://www.reddit.com' + this.props.permalink }>
+                <div className="post-thumb">
+                  <img src={ this.props.thumbnail } className="thumbnail-img"/>
+                </div>
+               </a>;
         };
         return (
           <div className="post-container">
@@ -18,11 +20,11 @@ module.exports = React.createClass({
                     <small className="post-score">score: { this.props.score }</small>
                 </h4>
                 <p className="list-group-item-text">
-                    <span className="listing-job-type">Subreddit: { this.props.subreddit }</span>
+                    <span className="subreddit">Subreddit: { this.props.subreddit }</span>
                 </p>
                 <p className="list-group-item-text">
                     <span className="post-posted">Posted: { this.props.created_date }</span>
-                    <span className="listing-company-category">{ this.props.category }</span>
+                    <span className="num-comments">{ this.props.numComments } comments</span>
                 </p>
             </a>
           </div>
