@@ -5,7 +5,7 @@ module.exports = React.createClass({
         return (
           <div className="post-container">
             <div className="post-thumb">
-              <img src={ this.props.thumbnail } />
+              <img src={ this.props.thumbnail } className="thumbnail-img"/>
             </div>
             <a href={ 'http://www.reddit.com' + this.props.permalink } className="list-group-item">
                 <h4 className="list-group-item-heading post">

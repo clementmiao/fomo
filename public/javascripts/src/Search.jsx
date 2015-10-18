@@ -8,14 +8,14 @@ module.exports = React.createClass({
   },
   render: function() {
     return(
-      <form>
+      <form className="search-bar">
         <input
           type="text"
           placeholder="input link URL..."
           value={ this.props.searchText }
           ref="searchTextInput"
           onChange={ this.handleChange }
-          className="search-bar"
+          className="search-box"
         />
       </form>
     )

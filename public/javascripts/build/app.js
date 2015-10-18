@@ -82972,14 +82972,14 @@ module.exports = React.createClass({displayName: "exports",
   },
   render: function() {
     return(
-      React.createElement("form", null, 
+      React.createElement("form", {className: "search-bar"}, 
         React.createElement("input", {
           type: "text", 
           placeholder: "input link URL...", 
           value:  this.props.searchText, 
           ref: "searchTextInput", 
           onChange:  this.handleChange, 
-          className: "search-bar"}
+          className: "search-box"}
         )
       )
     )
@@ -83021,7 +83021,7 @@ module.exports = React.createClass({displayName: "exports",
         return (
           React.createElement("div", {className: "post-container"}, 
             React.createElement("div", {className: "post-thumb"}, 
-              React.createElement("img", {src:  this.props.thumbnail})
+              React.createElement("img", {src:  this.props.thumbnail, className: "thumbnail-img"})
             ), 
             React.createElement("a", {href:  'http://www.reddit.com' + this.props.permalink, className: "list-group-item"}, 
                 React.createElement("h4", {className: "list-group-item-heading post"}, 
@@ -83061,7 +83061,7 @@ module.exports = React.createClass({displayName: "exports",
     var encodedText = encodeURI(searchText);
 		request('https://www.reddit.com/search.json?q=' + encodedText, function(error, response, body) {
       var result = JSON.parse(body);
-      // console.log(result);
+      console.log(result);
       var flattened = [];
       if (result.constructor != Array) {
         result = [result];

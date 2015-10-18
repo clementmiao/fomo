@@ -17,11 +17,32 @@ a {
 	float: right;
 }
 
-.post-thumb img {
+.post-thumb {
   // max-width: 100%;
   // max-height: 100%;
   flex-grow: 1;
+  // align-items: center;
+  // display: inline-block;
+  // vertical-align: middle;
+  // height: 100%;
+  // position: relative;
+  // top: 50%;
+  // transform: translateY(-50%);
   // float: left;
+  // text-align: center;
+  // margin: 1em 0;
+  display: flex;
+}
+
+.thumbnail-img {
+  // align-items: center;
+  // position: relative;
+  // top: 50%;
+  // transform: translateY(-50%);
+  // vertical-align: middle;
+  // max-height: 100%;
+  // max-width: 100%;
+  margin: auto;
 }
 
 .post-author {
@@ -30,7 +51,7 @@ a {
 
 .list-group-item {
   flex-grow: 2;
-  // margin-left: 210px;
+  margin-left: 10px;
 }
 //
 // .listing-company-category {
@@ -38,9 +59,20 @@ a {
 // }
 
 .post-container {
+  margin-top: 5px;
   display: flex;
 }
 
 .search-table {
   display: flex;
+  flex-direction: column;
+}
+
+.search-bar {
+  flex-grow: 1;
+  display: flex;
+}
+
+.search-box {
+  flex-grow: 1;
 }
