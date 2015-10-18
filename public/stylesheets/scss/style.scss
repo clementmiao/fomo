@@ -32,11 +32,15 @@ a {
   flex-grow: 2;
   // margin-left: 210px;
 }
-// 
+//
 // .listing-company-category {
 // 	float: right;
 // }
 
 .post-container {
+  display: flex;
+}
+
+.search-table {
   display: flex;
 }

@@ -35,34 +35,6 @@ module.exports = React.createClass({
 			this.setState(res);
 		}.bind(this));
 	},
-  componentDidMount: function() {
-    var searchText = this.props.searchText;
-		request('', function(error, response, body) {
-      if ( body === '') {
-        return (<div className="list-group"></div>);
-      };
-      var result = JSON.parse(body);
-      // console.log(result);
-      var flattened = [];
-      if (result.constructor != Array) {
-        result = [result];
-      }
-      for (i = 0; i < result.length; i++) {
-        var children = result[i].data.children;
-        for (j = 0; j < children.length; j++) {
-          if (children[j].kind == "t3") {
-              flattened.push(children[j]);
-          }
-        }
-      };
-      // console.log(flattened[0].data);
-      var res = {};
-      res["data"] = flattened;
-      if (this.isMounted()) {
-        this.setState(res);
-      }
-		}.bind(this));
-	},
 	render: function() {
 		return (
 			<div className="list-group">

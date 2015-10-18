@@ -82978,7 +82978,8 @@ module.exports = React.createClass({displayName: "exports",
           placeholder: "input link URL...", 
           value:  this.props.searchText, 
           ref: "searchTextInput", 
-          onChange:  this.handleChange}
+          onChange:  this.handleChange, 
+          className: "search-bar"}
         )
       )
     )
@@ -83004,7 +83005,7 @@ module.exports = React.createClass({displayName: "exports",
   },
   render: function() {
     return(
-      React.createElement("div", null, 
+      React.createElement("div", {className: "search-table"}, 
         React.createElement(Search, {searchText:  this.state.searchText, onUserInput:  this.handleUserInput}), 
         React.createElement(Threads, {searchText:  this.state.searchText})
       )
@@ -83077,34 +83078,6 @@ module.exports = React.createClass({displayName: "exports",
       var res = {};
       res["data"] = flattened;
 			this.setState(res);
-		}.bind(this));
-	},
-  componentDidMount: function() {
-    var searchText = this.props.searchText;
-		request('', function(error, response, body) {
-      if ( body === '') {
-        return (React.createElement("div", {className: "list-group"}));
-      };
-      var result = JSON.parse(body);
-      // console.log(result);
-      var flattened = [];
-      if (result.constructor != Array) {
-        result = [result];
-      }
-      for (i = 0; i < result.length; i++) {
-        var children = result[i].data.children;
-        for (j = 0; j < children.length; j++) {
-          if (children[j].kind == "t3") {
-              flattened.push(children[j]);
-          }
-        }
-      };
-      // console.log(flattened[0].data);
-      var res = {};
-      res["data"] = flattened;
-      if (this.isMounted()) {
-        this.setState(res);
-      }
 		}.bind(this));
 	},
 	render: function() {

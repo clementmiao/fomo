@@ -16,7 +16,7 @@ module.exports = React.createClass({
   },
   render: function() {
     return(
-      <div>
+      <div className = "search-table">
         <Search searchText= { this.state.searchText } onUserInput={ this.handleUserInput } />
         <Threads searchText= { this.state.searchText } />
       </div>

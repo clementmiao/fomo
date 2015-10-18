@@ -15,6 +15,7 @@ module.exports = React.createClass({
           value={ this.props.searchText }
           ref="searchTextInput"
           onChange={ this.handleChange }
+          className="search-bar"
         />
       </form>
     )
