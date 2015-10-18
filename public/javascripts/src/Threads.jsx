@@ -14,6 +14,7 @@ module.exports = React.createClass({
 	componentWillReceiveProps: function(nextProps) {
     var searchText = nextProps.searchText;
     var encodedText = encodeURI(searchText);
+    var baseUrl = url.parse(encodedText).host;
 		request('https://www.reddit.com/search.json?q=' + encodedText, function(error, response, body) {
       var result = JSON.parse(body);
       var flattened = [];
@@ -23,7 +24,7 @@ module.exports = React.createClass({
       for (i = 0; i < result.length; i++) {
         var children = result[i].data.children;
         for (j = 0; j < children.length; j++) {
-          if (children[j].kind == "t3") {
+          if (children[j].kind == "t3" && children[j].data.domain === baseUrl) {
               flattened.push(children[j]);
           }
         }

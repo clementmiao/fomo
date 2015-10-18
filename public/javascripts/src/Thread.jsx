@@ -3,7 +3,7 @@ var React = require('react');
 module.exports = React.createClass({
     render: function() {
         var tn;
-        if (this.props.thumbnail) {
+        if (this.props.thumbnail && this.props.thumbnail != 'default') {
           tn = <a href={ 'http://www.reddit.com' + this.props.permalink }>
                 <div className="post-thumb">
                   <img src={ this.props.thumbnail } className="thumbnail-img"/>

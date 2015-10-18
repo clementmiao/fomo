@@ -83030,7 +83030,7 @@ var React = require('react');
 module.exports = React.createClass({displayName: "exports",
     render: function() {
         var tn;
-        if (this.props.thumbnail) {
+        if (this.props.thumbnail && this.props.thumbnail != 'default') {
           tn = React.createElement("a", {href:  'http://www.reddit.com' + this.props.permalink}, 
                 React.createElement("div", {className: "post-thumb"}, 
                   React.createElement("img", {src:  this.props.thumbnail, className: "thumbnail-img"})
@@ -83076,6 +83076,7 @@ module.exports = React.createClass({displayName: "exports",
 	componentWillReceiveProps: function(nextProps) {
     var searchText = nextProps.searchText;
     var encodedText = encodeURI(searchText);
+    var baseUrl = url.parse(encodedText).host;
 		request('https://www.reddit.com/search.json?q=' + encodedText, function(error, response, body) {
       var result = JSON.parse(body);
       var flattened = [];
@@ -83085,7 +83086,7 @@ module.exports = React.createClass({displayName: "exports",
       for (i = 0; i < result.length; i++) {
         var children = result[i].data.children;
         for (j = 0; j < children.length; j++) {
-          if (children[j].kind == "t3") {
+          if (children[j].kind == "t3" && children[j].data.domain === baseUrl) {
               flattened.push(children[j]);
           }
         }
