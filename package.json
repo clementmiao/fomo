@@ -18,7 +18,8 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "request": "^2.65.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "browserify": "^11.2.0",

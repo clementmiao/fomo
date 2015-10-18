@@ -82965,6 +82965,57 @@ module.exports = Request
 var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
+  handleChange: function() {
+    this.props.onUserInput(
+      this.refs.searchTextInput.value
+    )
+  },
+  render: function() {
+    return(
+      React.createElement("form", null, 
+        React.createElement("input", {
+          type: "text", 
+          placeholder: "input link URL...", 
+          value:  this.props.searchText, 
+          ref: "searchTextInput", 
+          onChange:  this.handleChange}
+        )
+      )
+    )
+  }
+})
+
+},{"react":406}],502:[function(require,module,exports){
+var React = require('react');
+var Threads = require('./Threads.jsx');
+var Search = require('./Search.jsx');
+
+module.exports = React.createClass({displayName: "exports",
+  getInitialState: function() {
+    return {
+      searchText: ''
+    };
+  },
+  handleUserInput: function(searchText) {
+    // console.log(searchText);
+    this.setState({
+      searchText: searchText
+    });
+  },
+  render: function() {
+    return(
+      React.createElement("div", null, 
+        React.createElement(Search, {searchText:  this.state.searchText, onUserInput:  this.handleUserInput}), 
+        React.createElement(Threads, {searchText:  this.state.searchText})
+      )
+    )
+  }
+})
+
+},{"./Search.jsx":501,"./Threads.jsx":504,"react":406}],503:[function(require,module,exports){
+var React = require('react');
+
+module.exports = React.createClass({displayName: "exports",
     render: function() {
         return (
           React.createElement("div", {className: "post-container"}, 
@@ -82990,24 +83041,26 @@ module.exports = React.createClass({displayName: "exports",
     }
 });
 
-},{"react":406}],502:[function(require,module,exports){
+},{"react":406}],504:[function(require,module,exports){
 var React = require('react');
 var request = require('request');
 var moment = require('moment');
+var url = require('url');
 
 var Thread = require('./Thread.jsx');
 
 module.exports = React.createClass({displayName: "exports",
 	getInitialState: function() {
-		// This will return an API call eventually ...
 		return {
 			data: []
 		};
 	},
-	componentDidMount: function() {
-		request('https://www.reddit.com/search.json?q=https%3A%2F%2Fi.imgur.com%2FAMYSUi1.jpg', function(error, response, body) {
+	componentWillReceiveProps: function(nextProps) {
+    var searchText = nextProps.searchText;
+    var encodedText = encodeURI(searchText);
+		request('https://www.reddit.com/search.json?q=' + encodedText, function(error, response, body) {
       var result = JSON.parse(body);
-      console.log(result);
+      // console.log(result);
       var flattened = [];
       if (result.constructor != Array) {
         result = [result];
@@ -83020,12 +83073,38 @@ module.exports = React.createClass({displayName: "exports",
           }
         }
       };
-      console.log(flattened[0].data);
+      // console.log(flattened[0].data);
       var res = {};
       res["data"] = flattened;
-			if (this.isMounted()) {
-				this.setState(res);
-			}
+			this.setState(res);
+		}.bind(this));
+	},
+  componentDidMount: function() {
+    var searchText = this.props.searchText;
+		request('', function(error, response, body) {
+      if ( body === '') {
+        return (React.createElement("div", {className: "list-group"}));
+      };
+      var result = JSON.parse(body);
+      // console.log(result);
+      var flattened = [];
+      if (result.constructor != Array) {
+        result = [result];
+      }
+      for (i = 0; i < result.length; i++) {
+        var children = result[i].data.children;
+        for (j = 0; j < children.length; j++) {
+          if (children[j].kind == "t3") {
+              flattened.push(children[j]);
+          }
+        }
+      };
+      // console.log(flattened[0].data);
+      var res = {};
+      res["data"] = flattened;
+      if (this.isMounted()) {
+        this.setState(res);
+      }
 		}.bind(this));
 	},
 	render: function() {
@@ -83052,18 +83131,18 @@ module.exports = React.createClass({displayName: "exports",
 	}
 });
 
-},{"./Thread.jsx":501,"moment":250,"react":406,"request":407}],503:[function(require,module,exports){
+},{"./Thread.jsx":503,"moment":250,"react":406,"request":407,"url":243}],505:[function(require,module,exports){
 (function (global){
 var $ = global.jQuery = require('jquery');
 var bootstrap = require('../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap');
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Threads = require('./Threads.jsx');
+var SearchTable = require('./SearchTable.jsx');
 
 ReactDOM.render(
-	React.createElement(Threads, null),
-	document.getElementById('threads')
+	React.createElement(SearchTable, null),
+	document.getElementById('search-table')
 );
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap":1,"./Threads.jsx":502,"jquery":249,"react":406,"react-dom":251}]},{},[503]);
+},{"../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap":1,"./SearchTable.jsx":502,"jquery":249,"react":406,"react-dom":251}]},{},[505]);

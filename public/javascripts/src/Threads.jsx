@@ -1,20 +1,22 @@
 var React = require('react');
 var request = require('request');
 var moment = require('moment');
+var url = require('url');
 
 var Thread = require('./Thread.jsx');
 
 module.exports = React.createClass({
 	getInitialState: function() {
-		// This will return an API call eventually ...
 		return {
 			data: []
 		};
 	},
-	componentDidMount: function() {
-		request('https://www.reddit.com/search.json?q=https%3A%2F%2Fi.imgur.com%2FAMYSUi1.jpg', function(error, response, body) {
+	componentWillReceiveProps: function(nextProps) {
+    var searchText = nextProps.searchText;
+    var encodedText = encodeURI(searchText);
+		request('https://www.reddit.com/search.json?q=' + encodedText, function(error, response, body) {
       var result = JSON.parse(body);
-      console.log(result);
+      // console.log(result);
       var flattened = [];
       if (result.constructor != Array) {
         result = [result];
@@ -27,12 +29,38 @@ module.exports = React.createClass({
           }
         }
       };
-      console.log(flattened[0].data);
+      // console.log(flattened[0].data);
       var res = {};
       res["data"] = flattened;
-			if (this.isMounted()) {
-				this.setState(res);
-			}
+			this.setState(res);
+		}.bind(this));
+	},
+  componentDidMount: function() {
+    var searchText = this.props.searchText;
+		request('', function(error, response, body) {
+      if ( body === '') {
+        return (<div className="list-group"></div>);
+      };
+      var result = JSON.parse(body);
+      // console.log(result);
+      var flattened = [];
+      if (result.constructor != Array) {
+        result = [result];
+      }
+      for (i = 0; i < result.length; i++) {
+        var children = result[i].data.children;
+        for (j = 0; j < children.length; j++) {
+          if (children[j].kind == "t3") {
+              flattened.push(children[j]);
+          }
+        }
+      };
+      // console.log(flattened[0].data);
+      var res = {};
+      res["data"] = flattened;
+      if (this.isMounted()) {
+        this.setState(res);
+      }
 		}.bind(this));
 	},
 	render: function() {

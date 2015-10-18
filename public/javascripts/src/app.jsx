@@ -2,9 +2,9 @@ var $ = global.jQuery = require('jquery');
 var bootstrap = require('../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap');
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Threads = require('./Threads.jsx');
+var SearchTable = require('./SearchTable.jsx');
 
 ReactDOM.render(
-	<Threads />,
-	document.getElementById('threads')
+	<SearchTable />,
+	document.getElementById('search-table')
 );
