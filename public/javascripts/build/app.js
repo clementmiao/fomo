@@ -84257,9 +84257,9 @@ module.exports = React.createClass({displayName: "exports",
 	},
 	componentWillReceiveProps: function(nextProps) {
     var searchText = nextProps.searchText;
-    var encodedText = encodeURI(searchText);
-    var baseUrl = S(url.parse(encodedText).host);//.host;
-		request('https://www.reddit.com/search.json?q=' + encodedText, function(error, response, body) {
+    var encodedText = encodeURIComponent(searchText);
+    var baseUrl = S(url.parse(searchText).host);
+	  request('https://www.reddit.com/search.json?q=' + encodedText, function(error, response, body) {
       var result = JSON.parse(body);
       var flattened = [];
       if (result.constructor != Array) {
@@ -84268,7 +84268,6 @@ module.exports = React.createClass({displayName: "exports",
       for (i = 0; i < result.length; i++) {
         var children = result[i].data.children;
         for (j = 0; j < children.length; j++) {
-          console.log(children[j].data.domain);
           if (children[j].kind == "t3" && baseUrl.contains(children[j].data.domain)) {
               flattened.push(children[j]);
           }
