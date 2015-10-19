@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var Router = require('react-router');
+// var routes = require('./public/javascripts/src/Routes');
 
 var index = require('./routes/index');
 var api = require('./routes/api');
@@ -39,6 +41,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api/', api);
+//
+// function router (req, res, next) {
+//   var context = {
+//     routes: routes, location: req.url
+//   };
+//   Router.create(context).run(function ran (Handler, state) {
+//     res.render('layout', {
+//       reactHtml: React.renderToString(<Handler />)
+//     });
+//   });
+// }
+
+// app.use((req, res) => {
+//   Router.run(routes, req.path, (Root, state) => {
+//     res.send('<!DOCTYPE html>' + React.renderToString( <Root/> ));
+//   });
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
